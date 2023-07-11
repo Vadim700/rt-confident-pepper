@@ -1,0 +1,29 @@
+// not used, look header__button
+
+.button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 10px 20px;
+	min-width: 100px;
+	border: none;
+	font-size: 20px;
+	border-radius: 10px;
+	border: 1px solid;
+	transition: all 0.2s ease 0s;
+	cursor: pointer;
+	text-transform: uppercase;
+	line-height: 1;
+	color: red;
+
+	svg {
+	}
+
+	@media (hover: hover) {
+		&:hover {
+			background-color: #333;
+			color: #fff;
+		}
+	}
+}

@@ -1,13 +1,25 @@
 import React from 'react';
 import { Todo } from './todo/component';
+import { ITodos } from '../../types/types';
 
-export const Todos: React.FC = ():JSX.Element => {
+import styles from './style.module.scss'
+
+type TodosProps = {
+	data: any[];
+}
+
+export const Todos: React.FC<TodosProps> = ({ data }):JSX.Element => {
 	return (
-		<div className="todos">
-			<Todo />
-			<Todo />
-			<Todo />
-			<Todo />
+		<div className={styles.todos}>
+			{
+				data
+					.filter((item: ITodos, index: number) => index <= 5)
+					.map(item => <Todo
+						title={item.title}
+						completed = {item.completed}
+						key={item.id}
+					/>)
+			}
 		</div>
 	);
 }
