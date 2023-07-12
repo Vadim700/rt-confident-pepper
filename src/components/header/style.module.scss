@@ -29,8 +29,10 @@
 		margin-right: 20px;
 		cursor: pointer;
 
-		:hover {
-			color: tomato;
+		@media (hover: hover) {
+			:hover {
+				color: tomato;
+			}
 		}
 	}
 
@@ -38,18 +40,22 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
 		padding: 10px 20px;
 		min-width: 100px;
-		background-color: transparent;
-		border: none;
+
 		font-size: 22px;
+		line-height: 1;
+		text-transform: uppercase;
+
 		border-radius: 10px;
 		border: 1px solid;
+		background-color: transparent;
 		transition: all 0.2s ease 0s;
 		cursor: pointer;
-		text-transform: uppercase;
-		line-height: 1;
+
+		&_active {
+			background-color: #333;
+		}
 
 		svg {
 			margin-right: 10px;

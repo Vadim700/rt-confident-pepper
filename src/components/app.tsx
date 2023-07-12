@@ -6,7 +6,7 @@ import { Footer } from "./footer/component";
 export const App = (): JSX.Element => {
 
   const [data, setData] = useState<[]>([]);
-  const [state, setState] = useState<string>('posts');
+  const [state, setState] = useState<any>(localStorage.getItem('state'));
   
   React.useEffect(() => {
     try {
@@ -16,7 +16,9 @@ export const App = (): JSX.Element => {
         
         setData(dataValue);
       }
+
       getData();
+      localStorage.setItem('state', state);
     } catch (error) {
       console.error(error);
     }
@@ -28,7 +30,7 @@ export const App = (): JSX.Element => {
 
   return (
     <div className="App">
-      <Header title="Confident Pepper" onClick={onclick} />
+      <Header title="Confident Pepper" onClick={onclick} state={ state } />
       <Body state={state} data={ data} />
       <Footer />
     </div>

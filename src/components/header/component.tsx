@@ -1,20 +1,32 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { GiChiliPepper } from 'react-icons/gi';
+import { BsPostcard, BsCardImage, BsCheck2Square } from "react-icons/bs";
 
 import styles from './style.module.scss';
 
-import { BsPostcard, BsCardImage, BsCheck2Square } from "react-icons/bs";
 
 type HeaderProps = {
 	title: string;
 	onClick: (event: any) => void;
+	state: string;
 }
 
-export const Header: FC<HeaderProps> = ({ title, onClick }): JSX.Element => {
-	
-	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+export const Header: FC<HeaderProps> = ({ title, onClick, state }): JSX.Element => {
+
+	const [stylesButton, setStylesButton] = React.useState<string>()
+	const [selected, setSelected] = React.useState(false);
+
+	const handleClick = (event:any) => {
 		onClick(event.target);
+		setStylesButton(event.target.attributes.id.value);
+
+		event.target.attributes.id.value === state
+			? event.currentTarget.style.color = 'red'
+			: event.currentTarget.style.color = 'blue'
+
+		// event.currentTarget.style.color = 'red';
 	}
+	
 
 	return (
 		<header className={styles.header}>
@@ -28,7 +40,8 @@ export const Header: FC<HeaderProps> = ({ title, onClick }): JSX.Element => {
 						className={styles.header__button}
 						id='posts'
 						onClick={handleClick}
-						title="posts"
+						title={state}
+						// style={stylesButton === state ? {color: 'red'} : {color: 'blue'}}
 					>
 						< BsPostcard />
 						posts
@@ -38,6 +51,8 @@ export const Header: FC<HeaderProps> = ({ title, onClick }): JSX.Element => {
 						className={styles.header__button}
 						id='albums'
 						onClick={handleClick}
+						title={state}
+						// style={stylesButton === state ? {color: 'red'} : {color: 'blue'}}
 					>
 						<BsCardImage/>
 						albums
@@ -47,6 +62,8 @@ export const Header: FC<HeaderProps> = ({ title, onClick }): JSX.Element => {
 						className={styles.header__button}
 						id='todos'
 						onClick={handleClick}
+						title={state}
+						// style={stylesButton === state ? {color: 'red'} : {color: 'blue'}}
 					>
 						< BsCheck2Square />
 						todos
