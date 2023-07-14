@@ -46,16 +46,13 @@
 		font-size: 22px;
 		line-height: 1;
 		text-transform: uppercase;
+		color: #fff;
 
 		border-radius: 10px;
-		border: 1px solid;
+		border: 1px solid #fff;
 		background-color: transparent;
 		transition: all 0.2s ease 0s;
 		cursor: pointer;
-
-		&_active {
-			background-color: #333;
-		}
 
 		svg {
 			margin-right: 10px;
@@ -65,8 +62,9 @@
 
 		@media (hover: hover) {
 			&:hover {
-				background-color: #333;
-				color: #fff;
+				color: tomato;
+				// =======
+				border-color: tomato;
 			}
 		}
 	}

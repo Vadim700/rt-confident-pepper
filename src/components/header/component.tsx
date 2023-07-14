@@ -7,28 +7,17 @@ import styles from './style.module.scss';
 
 type HeaderProps = {
 	title: string;
-	onClick: (event: any) => void;
+	onClick: (event: React.MouseEventHandler<HTMLButtonElement>) => void;
 	state: string;
 }
 
 export const Header: FC<HeaderProps> = ({ title, onClick, state }): JSX.Element => {
 
-	const [stylesButton, setStylesButton] = React.useState<string>()
-	const [selected, setSelected] = React.useState(false);
-
 	const handleClick = (event:any) => {
 		onClick(event.target);
-		setStylesButton(event.target.attributes.id.value);
-
-		event.target.attributes.id.value === state
-			? event.currentTarget.style.color = 'red'
-			: event.currentTarget.style.color = 'blue'
-
-		// event.currentTarget.style.color = 'red';
 	}
-	
 
-	return (
+	return (  
 		<header className={styles.header}>
 			<div className="container">
 				<div className={styles.header__top}>
@@ -37,33 +26,54 @@ export const Header: FC<HeaderProps> = ({ title, onClick, state }): JSX.Element 
 				</div>
 				<div className={ styles.header__bottom}>
 					<button
-						className={styles.header__button}
+						className={ styles.header__button }
 						id='posts'
 						onClick={handleClick}
-						title={state}
-						// style={stylesButton === state ? {color: 'red'} : {color: 'blue'}}
+						style={state === 'posts'
+							? {
+								color: 'white',
+								backgroundColor: 'tomato',
+								transform: 'scale(1.25) translateX(13px)',
+								// ============
+								border: 'none'
+							}
+							: {}}
 					>
 						< BsPostcard />
 						posts
 					</button>
 
 					<button
-						className={styles.header__button}
+						className={ styles.header__button }
 						id='albums'
 						onClick={handleClick}
-						title={state}
-						// style={stylesButton === state ? {color: 'red'} : {color: 'blue'}}
+						style={state === 'albums'
+							? {
+								color: 'white',
+								backgroundColor: 'tomato',
+								transform: 'scale(1.25)',
+								// ============
+								border: 'none'
+							} 
+							: {}}
 					>
 						<BsCardImage/>
 						albums
 					</button>
 
 					<button
-						className={styles.header__button}
+						className={ styles.header__button }
 						id='todos'
 						onClick={handleClick}
-						title={state}
-						// style={stylesButton === state ? {color: 'red'} : {color: 'blue'}}
+						style={state === 'todos'
+							? {
+								color: 'white',
+								backgroundColor: 'tomato',
+								transform: 'scale(1.25)',
+								// ============
+								border: 'none'
+							}
+							: {}}
 					>
 						< BsCheck2Square />
 						todos
