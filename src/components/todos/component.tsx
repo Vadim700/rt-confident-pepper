@@ -13,7 +13,7 @@ export const Todos: React.FC<TodosProps> = ({ data }):JSX.Element => {
 		<div className={styles.todos}>
 			{
 				data
-					.filter((item: ITodos, index: number) => index <= 5)
+					.filter((item: ITodos, index: number) => index <= 20)
 					.map(item => <Todo
 						title={item.title}
 						completed = {item.completed}

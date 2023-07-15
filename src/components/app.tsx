@@ -13,7 +13,7 @@ export const StateContext = React.createContext<any>(localStorage.getItem('state
 export const App = (): JSX.Element => {
   
   const [state, setState] = useState<any>(localStorage.getItem('state'));
-  const [data, setData] = useState<[]>([]);
+  const [data, setData] = useState([]);
   
   React.useEffect(() => {
     try {
@@ -35,11 +35,26 @@ export const App = (): JSX.Element => {
     setState(name.attributes.id.value);
   };
 
+  const removeItem = (id: any) => {
+
+    // const patchData = async () => {
+    //   const newData = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+    //     method: 'DELETE',
+    //   }).then(res => res.json());
+
+    //   setData(newData);
+    // }
+    // patchData();
+    // console.log(data)
+
+		setData((arr) => arr.filter((item:any) => item.id !== id));
+	}
+
   return (
     <StateContext.Provider value={ { state } }>
       <div className="App">
           <Header title="Confident Pepper" onClick={onclick} state={ state } />
-          <Body state={state} data={ data} />
+          <Body state={state} data={ data} removeItem={removeItem}/>
           <Footer />
       </div>
     </StateContext.Provider>

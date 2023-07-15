@@ -5,20 +5,25 @@ import { IPosts } from "../../types/types";
 
 
 type PostsProps = {
-	data: IPosts[];
+	// data: IPosts[];
+	data: any;
+	onclickRemove: any;
 }
 
-export const Posts: React.FC<PostsProps> = ({  data }): JSX.Element => {
+export const Posts: React.FC<PostsProps> = ({ data, onclickRemove }): JSX.Element => {
+
 	
 	return (
 		<div className={styles.posts}>
 			{
 				data
-					.filter((item, index: number) => index <= 20)
+					.filter((item:any, index: number) => index <= 4 )
 					.map((item: IPosts) => <Post
 						title={item.title}
 						body={item.body}
+						id={item.id}
 						key={item.id}
+						onclickRemove={onclickRemove}
 					/>) 
 			}
 		</div>

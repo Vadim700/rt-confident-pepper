@@ -9,6 +9,10 @@
 
 		svg {
 			font-size: 52px;
+
+			@media (max-width: 768px) {
+				font-size: 32px;
+			}
 		}
 	}
 
@@ -22,6 +26,10 @@
 		font-family: "Fasthand", cursive;
 		font-size: 52px;
 		margin: 0;
+
+		@media (max-width: 768px) {
+			font-size: 26px;
+		}
 	}
 
 	&__logo {
@@ -54,10 +62,22 @@
 		transition: all 0.2s ease 0s;
 		cursor: pointer;
 
+		@media (max-width: 768px) {
+			font-size: 0;
+			border: none;
+			padding: 0;
+			min-width: auto;
+		}
+
 		svg {
 			margin-right: 10px;
 			font-size: 36px;
 			pointer-events: none;
+
+			@media (max-width: 768px) {
+				margin: 0;
+				background-color: transparent !important;
+			}
 		}
 
 		@media (hover: hover) {
