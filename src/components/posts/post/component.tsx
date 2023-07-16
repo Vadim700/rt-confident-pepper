@@ -24,7 +24,8 @@ export const Post: React.FC<PostProps> = ({ title, body, id, onclickRemove }): J
 				<input type="checkbox" name="close" className={styles.post__checkbox} />
 			</span>
 			<h2 className={styles.post__title}>{ title }</h2>
-			<p className={styles.post__text}>{ body }</p>
+			<p className={styles.post__text}>{body}</p>
+			<span>{ id }</span>
 		</article>
 	);
 } 

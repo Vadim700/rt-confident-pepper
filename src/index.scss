@@ -35,6 +35,13 @@ body,
   max-width: 1080px;
   margin: 0px auto;
   padding: 0 15px;
+  height: 100%;
+}
+
+main .container {
+  display: flex;
+  flex-direction: column;
+  column-gap: 20px;
 }
 
 .footer {

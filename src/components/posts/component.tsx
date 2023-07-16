@@ -7,17 +7,17 @@ import { IPosts } from "../../types/types";
 type PostsProps = {
 	// data: IPosts[];
 	data: any;
-	onclickRemove: any;
+	onclickRemove: () => void;
+	navButton: any;
 }
 
-export const Posts: React.FC<PostsProps> = ({ data, onclickRemove }): JSX.Element => {
+export const Posts: React.FC<PostsProps> = ({ data, onclickRemove, navButton }): JSX.Element => {
 
-	
 	return (
 		<div className={styles.posts}>
 			{
 				data
-					.filter((item:any, index: number) => index <= 4 )
+					.slice(navButton, navButton + 10)
 					.map((item: IPosts) => <Post
 						title={item.title}
 						body={item.body}

@@ -7,6 +7,19 @@
 		align-items: center;
 		margin-bottom: 25px;
 
+		span {
+			font-family: "Fasthand", cursive;
+			font-size: 32px;
+			padding-right: 20px;
+			align-self: end;
+			padding-bottom: 5px;
+
+			strong {
+				color: tomato;
+				font-weight: 700;
+			}
+		}
+
 		svg {
 			font-size: 52px;
 
@@ -26,6 +39,7 @@
 		font-family: "Fasthand", cursive;
 		font-size: 52px;
 		margin: 0;
+		margin-right: auto;
 
 		@media (max-width: 768px) {
 			font-size: 26px;

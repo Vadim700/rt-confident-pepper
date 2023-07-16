@@ -13,12 +13,10 @@ export const Albums:React.FC<AlbumProps> = ({data}):JSX.Element => {
 		<div className={styles.albums}>
 			{
 				data
-					.filter((value: any, index: number) => index <= 4)
 					.map((item: any) => <Album
 							title={item.title}
 							key={item.id}
-						/>
-					)
+						/>)
 			}
 		</div>
 	);

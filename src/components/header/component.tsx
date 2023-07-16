@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from "react";
-import { GiChiliPepper } from 'react-icons/gi';
+import React, { FC } from "react";
+import { FaCrutch } from 'react-icons/fa';
 import { BsPostcard, BsCardImage, BsCheck2Square } from "react-icons/bs";
 
 import styles from './style.module.scss';
@@ -9,9 +9,10 @@ type HeaderProps = {
 	title: string;
 	onClick: (event: React.MouseEventHandler<HTMLButtonElement>) => void;
 	state: string;
+	data: any;
 }
 
-export const Header: FC<HeaderProps> = ({ title, onClick, state }): JSX.Element => {
+export const Header: FC<HeaderProps> = ({ title, onClick, state, data }): JSX.Element => {
 
 	const handleClick = (event:any) => {
 		onClick(event.target);
@@ -21,9 +22,11 @@ export const Header: FC<HeaderProps> = ({ title, onClick, state }): JSX.Element 
 		<header className={styles.header}>
 			<div className="container">
 				<div className={styles.header__top}>
-					<GiChiliPepper className={ styles.header__logo} />
-					<h1 className={ styles.header__title}>{ title + ' Vadimikus'}</h1>
+					<FaCrutch className={ styles.header__logo} />
+					<h1 className={styles.header__title}>{title + ' Vadimikus'}</h1>
+					<span>Coutn of data:  <strong>{ data.length}</strong> </span>
 				</div>
+				
 				<div className={ styles.header__bottom}>
 					<button
 						className={ styles.header__button }
