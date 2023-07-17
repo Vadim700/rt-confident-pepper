@@ -17,13 +17,20 @@ export const Post: React.FC<PostProps> = ({ title, body, id, onclickRemove }): J
 	
 	return (
 		<article className={styles.post__item}>
-			<button className={styles.post__close} onClick={removeItem}>
+			<button
+				className={styles.post__close}
+				onClick={removeItem}>
 				<GrClose />
 			</button>
 			<span className={styles.post__checkbox_body}>
-				<input type="checkbox" name="close" className={styles.post__checkbox} />
+				<input
+					type="checkbox"
+					name="close"
+					className={styles.post__checkbox} />
 			</span>
-			<h2 className={styles.post__title}>{ title }</h2>
+			<h2 className={styles.post__title}>
+				{title}
+			</h2>
 			<p className={styles.post__text}>{body}</p>
 			<span>{ id }</span>
 		</article>

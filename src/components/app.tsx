@@ -11,6 +11,11 @@ export const App = (): JSX.Element => {
   
   const [state, setState] = useState<any>(localStorage.getItem('state'));
   const [data, setData] = useState([]);
+  let page = 1;
+
+  const pageNumber = (e:any) => {
+    page = e;
+  }
 
   React.useEffect(() => {
     try {
@@ -26,7 +31,7 @@ export const App = (): JSX.Element => {
     } catch (error) {
       console.error(error);
     }
-  }, [state])
+  }, [state, page])
   
   localStorage.setItem('data', JSON.stringify(data));
   
@@ -37,6 +42,9 @@ export const App = (): JSX.Element => {
   const removeItem = (id: any) => {
     setData((arr) => arr.filter((item: any) => item.id !== id));
   };
+
+
+
 
   return (
     <StateContext.Provider value={ { state } }>
@@ -51,6 +59,7 @@ export const App = (): JSX.Element => {
           state={state} 
           data={ data} 
           removeItem={removeItem}
+          pageNumber={pageNumber}
         />
 
         <Footer />
