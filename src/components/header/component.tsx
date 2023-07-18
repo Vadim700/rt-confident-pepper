@@ -2,6 +2,11 @@ import React, { FC } from "react";
 import { FaCrutch } from 'react-icons/fa';
 import { BsPostcard, BsCardImage, BsCheck2Square } from "react-icons/bs";
 
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
 import styles from './style.module.scss';
 
 
@@ -10,13 +15,20 @@ type HeaderProps = {
 	onClick: (event: React.MouseEventHandler<HTMLButtonElement>) => void;
 	state: string;
 	data: any;
+	onchange: any;
 }
 
-export const Header: FC<HeaderProps> = ({ title, onClick, state, data }): JSX.Element => {
+export const Header: FC<HeaderProps> = ({ title, onClick, state, data, onchange}): JSX.Element => {
+	const [perPage, setPerPage] = React.useState('');
 
-	const handleClick = (event:any) => {
+	const handleClick = (event: any) => {
 		onClick(event.target);
-	}
+	};
+	
+	const handleChange = (event: SelectChangeEvent) => {
+		setPerPage(event.target.value);
+		onchange(event.target.value)
+	};
 
 	return (  
 		<header className={styles.header}>
@@ -36,8 +48,6 @@ export const Header: FC<HeaderProps> = ({ title, onClick, state, data }): JSX.El
 							? {
 								color: 'white',
 								backgroundColor: 'tomato',
-								transform: 'scale(1.25) translateX(13px)',
-								// ============
 								border: 'none'
 							}
 							: {}}
@@ -54,8 +64,6 @@ export const Header: FC<HeaderProps> = ({ title, onClick, state, data }): JSX.El
 							? {
 								color: 'white',
 								backgroundColor: 'tomato',
-								transform: 'scale(1.25)',
-								// ============
 								border: 'none'
 							} 
 							: {}}
@@ -72,8 +80,6 @@ export const Header: FC<HeaderProps> = ({ title, onClick, state, data }): JSX.El
 							? {
 								color: 'white',
 								backgroundColor: 'tomato',
-								transform: 'scale(1.25)',
-								// ============
 								border: 'none'
 							}
 							: {}}
@@ -81,8 +87,54 @@ export const Header: FC<HeaderProps> = ({ title, onClick, state, data }): JSX.El
 						< BsCheck2Square />
 						todos
 					</button>
+					<FormControl
+						className={styles.formControl}
+						sx={{
+							m: 1,
+							minWidth: 180,
+							marginLeft: 'auto',
+							'& .MuiOutlinedInput-notchedOutline': {
+								// borderColor: 'white'
+							},
+						}
+						}>
+						<InputLabel
+							className={styles.label}
+							id="demo-simple-select-autowidth-label"
+							sx={{
+								color: 'white',
+								backgroundColor: '#333',
+								padding: '0 6px',
+								'&	.Mui-focused': {
+									color: 'red',
+								}
+							}}
+						>
+							{state} per page:
+						</InputLabel>
+						<Select
+							labelId="demo-simple-select-autowidth-label"
+							id="demo-simple-select-autowidth"
+							value={perPage}
+							onChange={handleChange}
+							autoWidth
+							sx={{
+								color: 'white',
+								'& .MuiSvgIcon-root MuiSvgIcon-fontSizeMedium': {
+									color: 'white'
+								},
+							}}
+						>
+							<MenuItem value={20}>20</MenuItem>
+							<MenuItem value={40}>40</MenuItem>
+							<MenuItem value={60}>60</MenuItem>
+							<MenuItem value={80}>80</MenuItem>
+							<MenuItem value={100}>100</MenuItem>
+						</Select>
+					</FormControl>
 				</div>
 			</div>
 		</header>
 	);
 } 
+

@@ -103,3 +103,28 @@
 		}
 	}
 }
+
+.formControl {
+	transition: all 0 s ease 0s;
+
+	fieldset {
+		border-color: white;
+		border-radius: 10px;
+	}
+
+	svg {
+		color: white;
+	}
+
+	&:hover {
+		.label {
+			color: tomato;
+		}
+		svg {
+			color: tomato;
+		}
+		fieldset {
+			border-color: tomato;
+		}
+	}
+}

@@ -1,10 +1,11 @@
 import React from "react";
-import { FC, useState } from "react";
+import { FC, useRef } from "react";
 import { Posts } from '../posts/component';
 import { Albums } from "../albums/component";
 import { Todos } from "../todos/component";
 import { IPosts } from "../../types/types";
-import {Container, Pagination, TextField, Stack, Link } from "@mui/material";
+
+import {Container, Checkbox, Pagination, TextField, Stack, Link } from "@mui/material";
 
 import styles from './style.module.scss';
 
@@ -15,49 +16,51 @@ type BodyProps = {
 	pageNumber: any;
 }
 
-const pages: number[] = Array(10).fill(1).map((v, i) => i + 1);
+// const pages: number[] = Array(10).fill(1).map((v, i) => i + 1);
 
 export const Body: FC<BodyProps> = ({ state, data, removeItem, pageNumber }): JSX.Element => {
-	const [valueNav, setValueNav] = useState(1);
 
 	const handlerClick = (event: any) => {
-		// setValueNav(event.target.childNodes[0].data * 10 - 1);
-		// pageNumber(event.target.childNodes[0].data);
 		pageNumber(event.target?.innerText);
-		setValueNav(event.target?.innerText * 10 - 1);
-		console.log(event.target?.innerText)
 	}
+
+	const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+	const checkbox = useRef(null);
+
+	
+	const selectAll = (e:any) => {
+		console.log(e);
+	}
+
 
 	return (
 		<main className={ styles.content}>
 			<div className="container"> 
 				
+			<span className={styles.checkbox}>
+					<Checkbox
+						onChange={selectAll}
+						ref = {checkbox}
+						className={styles.post__checkbox}
+						{...label}
+						sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+					/>
+				<button
+					onClick={selectAll}>
+					Select all
+				</button>
+			</span>
+				
 				{state === 'posts' && <Posts
 					data={data}
 					onclickRemove={removeItem}
-					navButton={valueNav}
 				/>} 
 				
 				{state === 'albums' && <Albums data={data} />}
 				
 				{state === 'todos' && <Todos data={ data } />}
 			
-				{/* <nav className={styles.navigation}>
-					<button className={ styles.navigation__prev}></button>
-					{pages
-						.map((item, index) => (
-							<span className={styles.navigation__item} key={index}>
-								<button
-									className={styles.navigation__link}
-									onClick={handlerClick}
-								>
-									{item} 
-								</button>
-							</span>))
-					}
-					<button className={ styles.navigation__next}></button>
-				</nav> */}
-
 				<Container>
 					<Stack spacing={5}>
 						<Pagination

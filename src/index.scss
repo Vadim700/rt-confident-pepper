@@ -42,6 +42,7 @@ main .container {
   display: flex;
   flex-direction: column;
   column-gap: 20px;
+  justify-content: space-between;
 }
 
 .footer {

@@ -3,7 +3,7 @@ import { Header } from "./header/component";
 import { Body } from "./body/component";
 import { Footer } from "./footer/component";
 
-
+// https://jsonplaceholder.typicode.com/${state}?_page=7&_limit=5
 
 export const StateContext = React.createContext<any>(localStorage.getItem('state'));
 
@@ -11,16 +11,21 @@ export const App = (): JSX.Element => {
   
   const [state, setState] = useState<any>(localStorage.getItem('state'));
   const [data, setData] = useState([]);
-  let page = 1;
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = React.useState('');
+
+  const onchange = (e:any) => {
+    setPerPage(e);
+  }
 
   const pageNumber = (e:any) => {
-    page = e;
+    setPage(e);
   }
 
   React.useEffect(() => {
     try {
       const getData = async () => {
-        const dataValue = await fetch(`https://jsonplaceholder.typicode.com/${state}`)
+        const dataValue = await fetch(`https://jsonplaceholder.typicode.com/${state}?_page=${page}&_limit=${perPage}`)
           .then(res => res.json());
         
         setData(dataValue);
@@ -31,7 +36,7 @@ export const App = (): JSX.Element => {
     } catch (error) {
       console.error(error);
     }
-  }, [state, page])
+  }, [state, page, perPage])
   
   localStorage.setItem('data', JSON.stringify(data));
   
@@ -53,6 +58,7 @@ export const App = (): JSX.Element => {
           onClick={onclick}
           state={state}
           data={data}
+          onchange={onchange}
         />
         
         <Body 

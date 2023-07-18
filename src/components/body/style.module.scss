@@ -62,3 +62,24 @@
 		transform: rotate(-45deg);
 	}
 }
+
+.checkbox {
+	padding-bottom: 5px;
+	button {
+		font-size: 20px;
+		margin: 0;
+		padding: 0;
+		background-color: transparent;
+		border: none;
+		color: white;
+		cursor: pointer;
+		position: relative;
+		bottom: -4px;
+	}
+
+	svg {
+		path {
+			color: white;
+		}
+	}
+}
