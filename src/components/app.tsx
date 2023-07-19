@@ -52,7 +52,7 @@ export const App = (): JSX.Element => {
 
 
   return (
-    <StateContext.Provider value={ { state } }>
+
       <div className="App">
         <Header title="Confident Pepper"
           onClick={onclick}
@@ -67,10 +67,9 @@ export const App = (): JSX.Element => {
           removeItem={removeItem}
           pageNumber={pageNumber}
         />
-
         <Footer />
       </div>
-    </StateContext.Provider>
+    
   );
 }
 

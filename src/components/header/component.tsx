@@ -125,10 +125,10 @@ export const Header: FC<HeaderProps> = ({ title, onClick, state, data, onchange}
 								},
 							}}
 						>
+							<MenuItem value={10}>10</MenuItem>
 							<MenuItem value={20}>20</MenuItem>
-							<MenuItem value={40}>40</MenuItem>
-							<MenuItem value={60}>60</MenuItem>
-							<MenuItem value={80}>80</MenuItem>
+							<MenuItem value={30}>30</MenuItem>
+							<MenuItem value={50}>50</MenuItem>
 							<MenuItem value={100}>100</MenuItem>
 						</Select>
 					</FormControl>
