@@ -1,75 +1,59 @@
-import React, { useState } from "react";
-import { Header } from "./header/component";
-import { Body } from "./body/component";
-import { Footer } from "./footer/component";
+import React, { useState } from 'react';
+import { Header } from './header/component';
+import { Body } from './body/component';
+import { Footer } from './footer/component';
 
-// https://jsonplaceholder.typicode.com/${state}?_page=7&_limit=5
+import { useAppSelector } from '../hooks';
 
-export const StateContext = React.createContext<any>(localStorage.getItem('state'));
+// https://jsonplaceholder.typicode.com/posts?_page=7&_limit=5
 
 export const App = (): JSX.Element => {
-  
-  const [state, setState] = useState<any>(localStorage.getItem('state'));
-  const [data, setData] = useState([]);
-  const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = React.useState('');
+   const [data, setData] = useState([]);
+   const [page, setPage] = useState(1);
+   const [limit, setLimit] = React.useState('');
 
-  const onchange = (e:any) => {
-    setPerPage(e);
-  }
+   const state = useAppSelector((a: any) => a.state.state);
 
-  const pageNumber = (e:any) => {
-    setPage(e);
-  }
+   const onchange = (e: any) => {
+      setLimit(e);
+   };
 
-  React.useEffect(() => {
-    try {
-      const getData = async () => {
-        const dataValue = await fetch(`https://jsonplaceholder.typicode.com/${state}?_page=${page}&_limit=${perPage}`)
-          .then(res => res.json());
-        
-        setData(dataValue);
+   const pageNumber = (e: any): any => {
+      setPage(e);
+   };
+
+   React.useEffect(() => {
+      try {
+         const getData = async () => {
+            const dataValue = await fetch(
+               `https://jsonplaceholder.typicode.com/${state}?_page=${page}&_limit=${limit}`,
+            ).then(async (res) => res.json());
+
+            setData(dataValue);
+         };
+         getData();
+         localStorage.setItem('state', state);
+      } catch (error) {
+         console.error(error);
       }
-      getData();
-      localStorage.setItem('state', state);
-      
-    } catch (error) {
-      console.error(error);
-    }
-  }, [state, page, perPage])
-  
-  localStorage.setItem('data', JSON.stringify(data));
-  
-  const onclick = (name: any) => {
-    setState(name.attributes.id.value);
-  };
-  
-  const removeItem = (id: any) => {
-    setData((arr) => arr.filter((item: any) => item.id !== id));
-  };
+   }, [state, page, limit]);
 
+   localStorage.setItem('data', JSON.stringify(data));
 
+   const removeItem = (id: number): any => {
+      setData((arr) => arr.filter((item: any) => item.id !== id));
+   };
 
-
-  return (
-
+   return (
       <div className="App">
-        <Header title="Confident Pepper"
-          onClick={onclick}
-          state={state}
-          data={data}
-          onchange={onchange}
-        />
-        
-        <Body 
-          state={state} 
-          data={ data} 
-          removeItem={removeItem}
-          pageNumber={pageNumber}
-        />
-        <Footer />
+         <Header title="Confident Pepper" data={data} onchange={onchange} />
+         <Body
+            state={state}
+            data={data}
+            removeItem={removeItem}
+            pageNumber={pageNumber}
+         />
+         <Footer />
       </div>
-    
-  );
-}
-
+   );
+};

@@ -1,90 +1,102 @@
-import React, { FC } from "react";
-import { FaCrutch } from 'react-icons/fa';
-import { BsPostcard, BsCardImage, BsCheck2Square } from "react-icons/bs";
+import React, { FC } from 'react'
+import { FaCrutch } from 'react-icons/fa'
+import { BsPostcard, BsCardImage, BsCheck2Square } from 'react-icons/bs'
 
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useAppDispatch } from '../../hooks'
+import { useAppSelector } from '../../hooks'
+import { setState } from '../../redux/slices/stateSlice'
 
-import styles from './style.module.scss';
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select, { SelectChangeEvent } from '@mui/material/Select'
 
+import styles from './style.module.scss'
 
 type HeaderProps = {
-	title: string;
-	onClick: (event: React.MouseEventHandler<HTMLButtonElement>) => void;
-	state: string;
-	data: any;
-	onchange: any;
+	title: string
+	data: any
+	onchange: any
 }
 
-export const Header: FC<HeaderProps> = ({ title, onClick, state, data, onchange}): JSX.Element => {
-	const [perPage, setPerPage] = React.useState('');
+export const Header: FC<HeaderProps> = ({
+	title,
+	data,
+	onchange,
+}): JSX.Element => {
+	const dispatch = useAppDispatch()
+	const state = useAppSelector((a: any) => a.state.state)
 
-	const handleClick = (event: any) => {
-		onClick(event.target);
-	};
-	
+	const [perPage, setPerPage] = React.useState('')
+
 	const handleChange = (event: SelectChangeEvent) => {
-		setPerPage(event.target.value);
-		onchange(event.target.value)
-	};
+		setPerPage(event.target.value),
+			onchange(event.target.value),
+	}
 
-	return (  
+	return (
 		<header className={styles.header}>
-			<div className="container">
+			<div className='container'>
 				<div className={styles.header__top}>
-					<FaCrutch className={ styles.header__logo} />
+					<FaCrutch className={styles.header__logo} />
 					<h1 className={styles.header__title}>{title + ' Vadimikus'}</h1>
-					<span>Coutn of data:  <strong>{ data.length}</strong> </span>
+					<span>
+						Coutn of data: <strong>{data.length}</strong>{' '}
+					</span>
 				</div>
-				
-				<div className={ styles.header__bottom}>
+
+				<div className={styles.header__bottom}>
 					<button
-						className={ styles.header__button }
+						className={styles.header__button}
 						id='posts'
-						onClick={handleClick}
-						style={state === 'posts'
-							? {
-								color: 'white',
-								backgroundColor: 'tomato',
-								border: 'none'
-							}
-							: {}}
+						onClick={() => dispatch(setState('posts'))}
+						style={
+							state === 'posts'
+								? {
+										color: 'white',
+										backgroundColor: 'tomato',
+										border: 'none'
+								}
+								: {}
+						}
 					>
-						< BsPostcard />
+						<BsPostcard />
 						posts
 					</button>
 
 					<button
-						className={ styles.header__button }
+						className={styles.header__button}
 						id='albums'
-						onClick={handleClick}
-						style={state === 'albums'
-							? {
-								color: 'white',
-								backgroundColor: 'tomato',
-								border: 'none'
-							} 
-							: {}}
+						onClick={() => dispatch(setState('albums'))}
+						style={
+							state === 'albums'
+								? {
+										color: 'white',
+										backgroundColor: 'tomato',
+										border: 'none'
+								}
+								: {}
+						}
 					>
-						<BsCardImage/>
+						<BsCardImage />
 						albums
 					</button>
 
 					<button
-						className={ styles.header__button }
+						className={styles.header__button}
 						id='todos'
-						onClick={handleClick}
-						style={state === 'todos'
-							? {
-								color: 'white',
-								backgroundColor: 'tomato',
-								border: 'none'
-							}
-							: {}}
+						onClick={() => dispatch(setState('todos'))}
+						style={
+							state === 'todos'
+								? {
+										color: 'white',
+										backgroundColor: 'tomato',
+										border: 'none'
+								}
+								: {}
+						}
 					>
-						< BsCheck2Square />
+						<BsCheck2Square />
 						todos
 					</button>
 					<FormControl
@@ -95,26 +107,26 @@ export const Header: FC<HeaderProps> = ({ title, onClick, state, data, onchange}
 							marginLeft: 'auto',
 							'& .MuiOutlinedInput-notchedOutline': {
 								// borderColor: 'white'
-							},
-						}
-						}>
+							}
+						}}
+					>
 						<InputLabel
 							className={styles.label}
-							id="demo-simple-select-autowidth-label"
+							id='demo-simple-select-autowidth-label'
 							sx={{
 								color: 'white',
 								backgroundColor: '#333',
 								padding: '0 6px',
 								'&	.Mui-focused': {
-									color: 'red',
+									color: 'red'
 								}
 							}}
 						>
 							{state} per page:
 						</InputLabel>
 						<Select
-							labelId="demo-simple-select-autowidth-label"
-							id="demo-simple-select-autowidth"
+							labelId='demo-simple-select-autowidth-label'
+							id='demo-simple-select-autowidth'
 							value={perPage}
 							onChange={handleChange}
 							autoWidth
@@ -122,7 +134,7 @@ export const Header: FC<HeaderProps> = ({ title, onClick, state, data, onchange}
 								color: 'white',
 								'& .MuiSvgIcon-root MuiSvgIcon-fontSizeMedium': {
 									color: 'white'
-								},
+								}
 							}}
 						>
 							<MenuItem value={10}>10</MenuItem>
@@ -135,6 +147,5 @@ export const Header: FC<HeaderProps> = ({ title, onClick, state, data, onchange}
 				</div>
 			</div>
 		</header>
-	);
-} 
-
+	)
+}

@@ -1,33 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { store } from '../../redux/store';
 
 interface StateTypes {
-  value: string;
+	state: string
 }
-
-setTimeout(() => {
-  console.log(initialState)  
-}, 0);
 
 const initialState: StateTypes = {
-  state: 'posts',
+	state: 'posts'
 }
 
-
-export const stateSlice = createSlice({
+const stateSlice = createSlice({
 	name: 'state',
-
-  initialState,
-  reducers: {
-
-
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload
-    },
-  },
+	initialState,
+	reducers: {
+		setState: (state, action: PayloadAction<string>) => {
+			state.state = action.payload
+		}
+	}
 })
 
-export const selectCount = (state: StateTypes) => state.state.value
+export const { setState } = stateSlice.actions
 
-export default stateSlice.reducer   
+export default stateSlice.reducer

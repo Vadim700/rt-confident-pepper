@@ -1,11 +1,9 @@
-import React from "react";
+import React from 'react'
 
-export const Footer: React.FC = ():JSX.Element => {
+export const Footer: React.FC = (): JSX.Element => {
 	return (
-		<footer className="footer">
-			<div className="container">
-				FOOTER
-			</div>
+		<footer className='footer'>
+			<div className='container'>FOOTER</div>
 		</footer>
-	);
+	)
 }

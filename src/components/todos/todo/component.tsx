@@ -1,13 +1,15 @@
-import React from 'react';
-import styles from './style.module.scss';
+import React from 'react'
+import styles from './style.module.scss'
 
 type TodoProps = {
-	title: string;
-	completed: boolean;
+	title: string
+	completed: boolean
 }
 
-export const Todo: React.FC<TodoProps> = ({ title, completed }): JSX.Element => {
-	
+export const Todo: React.FC<TodoProps> = ({
+	title,
+	completed
+}): JSX.Element => {
 	return (
 		<article className={styles.todos__item}>
 			<div
@@ -17,5 +19,5 @@ export const Todo: React.FC<TodoProps> = ({ title, completed }): JSX.Element => 
 				{title}
 			</div>
 		</article>
-	);
+	)
 }
